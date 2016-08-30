@@ -1,0 +1,10 @@
+linux.divms.uiowa.edu
+
+Primitive  | Wrapper
+--------------------
+int        | Integer
+byte       | Byte
+short      | Short
+long       | Long
+float      | Float
+double     | Double
