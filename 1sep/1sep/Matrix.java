@@ -6,19 +6,7 @@ public class Matrix  {
 
     double[][] matrix;
 
-    Matrix(double[][] mat) {
-
-        /*
-        int max_sub_mat = 0;
-        for (int i = 0; i < mat.length; ++i) {
-            for (int j = 0; j < mat[i].length; ++j) { 
-                if (max_sub_mat < mat[i].length) {
-                    max_sub_mat = mat[i].length;
-                }
-            }
-        }
-        matrix = new double[mat.length][max_sub_mat];
-        */
+    Matrix(double[][] mat) { 
         matrix = mat;
         print_matrix();
     }
@@ -31,34 +19,30 @@ public class Matrix  {
     public void print_matrix() { 
         System.out.println("------------------------");
         for (int i = 0; i < matrix.length; ++i) {
-            System.out.println(Arrays.toString(matrix[i]));
-            /*
-            for (int j = 0; j < matrix[i].length; ++j) { 
-                System.out.print(matrix[i][j]);
+            System.out.println(Arrays.toString(matrix[i])); 
+            if (i != matrix.length - 1) {
+                System.out.println("");
             }
-            */
-            System.out.println("");
         }
-        System.out.println("------------------------");
+        System.out.println("------------------------\n");
     }
 
     public void swap(int rowA, int rowB) {
     // change current matrix by swapping rows rowA and rowB
-        //print_matrix();
+
+        // Testing
+        System.out.println("Before swap");
+        print_matrix();
+
         double[] tmp_arr;
-        /*
-        int len_A = matrix[rowA].length;
-        int len_B = matrix[rowB].length;
-
-        int max_len = (len_A > len_B) ? len_A : len_B;
-
-        double[] tmp_arr = new double[max_len]; 
-        */
 
         tmp_arr = matrix[rowA];
         matrix[rowA] = matrix[rowB];
         matrix[rowB] = tmp_arr;
-        //print_matrix();
+
+        // Testing
+        System.out.println("After swap");
+        print_matrix();
     }
 
     public int maxRow(int column_num) {
@@ -76,16 +60,6 @@ public class Matrix  {
                 }
             }
         } 
-
-
-        /*
-        for (int i = 0; j < mat[column_num][i].length; ++i) { 
-            if (mat[column_num][i] > max_num) {
-                max_num = mat[column_num][i];
-            }
-        }
-        */
-
         return index_at_max_num;
     }
 
@@ -100,6 +74,7 @@ public class Matrix  {
                 }
             }
         } 
+        //print_matrix();
 
         return;
     }
