@@ -12,7 +12,7 @@ public class Matrix  {
             matrix[i] = new double[mat[i].length];
             matrix[i] = mat[i].clone();
         }
-        print_matrix();
+        //print_matrix();
     }
     
     public double[] getRow(int rownum) {
@@ -60,11 +60,11 @@ public class Matrix  {
             for (int j = 0; j < matrix[i].length; ++j) {
                 if ((j == column_num) && (max_num < matrix[i][j])) { 
                     max_num = matrix[i][j];
-                    index_at_max_num = j;
+                    index_at_max_num = i;
                 }
             }
         } 
-        System.out.println("Max: " + max_num + ", i: " + index_at_max_num);
+        //System.out.println("Max: " + max_num + ", i: " + index_at_max_num);
         return index_at_max_num;
     }
 
