@@ -4,10 +4,14 @@ import java.util.Arrays;
 public class Matrix  {
 // Matrix will need additional members for instance variable and constructor
 
-    double[][] matrix;
+    double[][] matrix; 
 
     Matrix(double[][] mat) { 
-        matrix = mat;
+        matrix = new double[mat.length][];
+        for (int i = 0; i < mat.length; ++i) {
+            matrix[i] = new double[mat[i].length];
+            matrix[i] = mat[i].clone();
+        }
         print_matrix();
     }
     
@@ -31,8 +35,8 @@ public class Matrix  {
     // change current matrix by swapping rows rowA and rowB
 
         // Testing
-        System.out.println("Before swap");
-        print_matrix();
+        //System.out.println("Before swap");
+        //print_matrix();
 
         double[] tmp_arr;
 
@@ -41,15 +45,15 @@ public class Matrix  {
         matrix[rowB] = tmp_arr;
 
         // Testing
-        System.out.println("After swap");
-        print_matrix();
+        //System.out.println("After swap");
+        //print_matrix();
     }
 
     public int maxRow(int column_num) {
     // looking only at column column_num in matrix,
     // return index of which row has largest value
     // a[col][row]
-        double max_num = -1.0;
+        double max_num = -Double.MAX_VALUE;
         int index_at_max_num = -1;
 
         for (int i = 0; i < matrix.length; ++i) {
@@ -60,6 +64,7 @@ public class Matrix  {
                 }
             }
         } 
+        System.out.println("Max: " + max_num + ", i: " + index_at_max_num);
         return index_at_max_num;
     }
 
