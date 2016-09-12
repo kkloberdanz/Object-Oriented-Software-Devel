@@ -8,3 +8,9 @@ short      | Short
 long       | Long
 float      | Float
 double     | Double
+
+Gaussian Elimination:
+
+ 9x   +    y  +  63z = -1
+ 2x   +  18y  -   4z = -2
+12x   +  13y  +  14z = -3

@@ -72,6 +72,10 @@ public class Matrix  {
     // multiply all elements of current matrix in row rownum by factor
     // a[col][row]
         
+        for (int i = 0; i < matrix[rownum].length; ++i) {
+            matrix[rownum][i] *= factor;
+        }
+        /*
         for (int i = 0; i < matrix.length; ++i) {
             for (int j = 0; j < matrix[i].length; ++j) {
                 if (i == rownum) {
@@ -79,6 +83,7 @@ public class Matrix  {
                 }
             }
         } 
+        */
         //print_matrix();
 
         return;
