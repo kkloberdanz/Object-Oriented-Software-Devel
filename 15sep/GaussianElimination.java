@@ -2,12 +2,13 @@ import java.lang.Math.*;
 import java.util.*;
 
 class GaussianElimination extends Equations {
-  public GaussianElimination(Double[][] matrix) {
+    public GaussianElimination(Double[][] matrix) {
+
     super(matrix); // superclass saves input matrix as equations
     }
 
     private void print_matrix() {
-        System.out.println(super.M);
+        System.out.println(this.M);
     }
 
     private int get_num_cols() { 
@@ -29,9 +30,6 @@ class GaussianElimination extends Equations {
     }
 
     private void scaleRow(int rownum, double factor) {
-        // get each row from HashMap M
-        
-        //System.out.println(factor); 
         ArrayList row = new ArrayList<Double>(M.get(rownum));
         ArrayList scaled_row = new ArrayList<Double>();
 
@@ -40,7 +38,6 @@ class GaussianElimination extends Equations {
         } 
 
         M.put(rownum, scaled_row); 
-        //System.out.println(scaled_row); 
     }
 
     private void subtract_row(int row_a_index, int row_b_index) {
@@ -68,21 +65,30 @@ class GaussianElimination extends Equations {
       int last_row_index = this.get_num_rows() - 1;
 
       double scale_factor;
+      int rows_scaled = 0;
 
-      for (int row_index = last_row_index; row_index > 0; --row_index) { 
-
-          //for (int col_index = 0; col_index < get_num_cols() - 1; ++col_index) {
-
-              scale_factor = get_element_at(row_index - 1, 0) / 
-                             get_element_at(row_index, 0); 
-
-              //System.out.println("Scale factor: " + scale_factor);
-              scaleRow( row_index, scale_factor);
-              subtract_row(row_index, row_index - 1);
-          //}
-      } // for
+Outer:
+      for (int col_index = 0; col_index < get_num_cols() - 1; ++col_index) {
+          for (int row_index = last_row_index; row_index > 0; --row_index) { 
 
 
+                scale_factor = get_element_at(row_index - 1, col_index) / 
+                               get_element_at(row_index, col_index); 
 
+                System.out.println("Scale Factor: " + scale_factor);
+                //System.out.println("Scale factor: " + scale_factor);
+                scaleRow( row_index, scale_factor);
+
+                if (rows_scaled == get_num_rows()) {
+                    break Outer;
+                }
+
+                rows_scaled++; 
+
+                subtract_row(row_index, row_index - 1);
+
+                print_matrix();
+            } // for 
+        } 
     }
-  }
+}
