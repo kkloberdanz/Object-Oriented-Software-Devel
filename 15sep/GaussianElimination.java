@@ -8,11 +8,13 @@ class GaussianElimination extends Equations {
     }
 
     private void print_matrix() {
-        System.out.println(this.M);
+        for (int i = 0; i <= get_num_rows(); ++i) {
+            System.out.println(M.get(i));
+        }
     }
 
     private int get_num_cols() { 
-        ArrayList row = new ArrayList<Double>(M.get(0));
+        ArrayList<Double> row = new ArrayList<Double>(M.get(0));
         return row.size();
     }
 
@@ -25,18 +27,18 @@ class GaussianElimination extends Equations {
     }
 
     private double get_element_at(int row_num, int col_num) {
-        ArrayList row = new ArrayList<Double>(M.get(row_num));
+        ArrayList<Double> row = new ArrayList<Double>(M.get(row_num));
         return (double)row.get(col_num);
     }
 
     private void scaleRow(int rownum, double factor) {
-        ArrayList row = new ArrayList<Double>(M.get(rownum));
-        ArrayList scaled_row = new ArrayList<Double>();
+        ArrayList<Double> row = new ArrayList<Double>(M.get(rownum));
+        ArrayList<Double> scaled_row = new ArrayList<Double>();
 
         for (int i = 0; i < row.size(); ++i) {
-            scaled_row.add((Double)row.get(i) * factor);
+            scaled_row.add(row.get(i) * factor);
         } 
-
+        System.out.println(row + " * " + factor + " = " + scaled_row);
         M.put(rownum, scaled_row); 
     }
 
@@ -44,13 +46,14 @@ class GaussianElimination extends Equations {
         // row_a - row_b
         // subtract row_b from row_a
         
-        ArrayList row_a = new ArrayList<Double>(M.get(row_a_index));
-        ArrayList row_b = new ArrayList<Double>(M.get(row_b_index));
-        ArrayList row_c = new ArrayList<Double>();
+        ArrayList<Double> row_a = new ArrayList<Double>(M.get(row_a_index));
+        ArrayList<Double> row_b = new ArrayList<Double>(M.get(row_b_index));
+        ArrayList<Double> row_c = new ArrayList<Double>();
 
         for (int i = 0; i < row_a.size(); ++i) {
             row_c.add((double)row_a.get(i) - (double)row_b.get(i));
         }
+        System.out.println(row_a + " - " + row_b + " = " + row_c + "\n");
 
         M.put(row_a_index, row_c);
     }
@@ -84,8 +87,8 @@ Outer:
                 }
 
                 rows_scaled++; 
-
                 subtract_row(row_index, row_index - 1);
+
 
                 print_matrix();
             } // for 

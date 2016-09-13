@@ -1,4 +1,4 @@
 #!/bin/bash
 
-#clear && javac *.java -Xlint && java GaussianTest
-clear && javac *.java && java GaussianTest
+reset && javac *.java -Xlint && java GaussianTest
+#clear && javac *.java && java GaussianTest
