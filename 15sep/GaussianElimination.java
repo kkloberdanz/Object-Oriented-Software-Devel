@@ -49,10 +49,13 @@ class GaussianElimination extends Equations {
         return (double)row.get(col_num);
     }
 
-    private void subtract_row_by_arraylist(int row_num, ArrayList l) {
+    private void subtract_row_by_arraylist(int row_num, ArrayList<Double> l, int row_to_put) {
         ArrayList<Double> row_to_subtract = new ArrayList<Double>(M.get(row_num));
-        for (int i = 0; i < get_num_rows(); ++i) {
+        ArrayList<Double> tmp_row = new ArrayList<Double>();
+        for (int i = 0; i < get_num_rows()+1; ++i) {
+            tmp_row.add(row_to_subtract.get(i) - l.get(i));
         }
+        M.put(row_to_put, tmp_row);
     }
 
     int get_index_greatest_row(int col_num) {
@@ -83,8 +86,8 @@ class GaussianElimination extends Equations {
         M.put(rownum, scaled_row); 
     }
 
-    private ArrayList<Double> get_scaled_copy(row_num, double factor) { 
-        ArrayList<Double> row = new ArrayList<Double>(M.get(rownum));
+    private ArrayList<Double> get_scaled_copy(int row_num, double factor) { 
+        ArrayList<Double> row = new ArrayList<Double>(M.get(row_num));
         ArrayList<Double> scaled_row = new ArrayList<Double>();
 
         for (int i = 0; i < row.size(); ++i) {
@@ -117,6 +120,7 @@ class GaussianElimination extends Equations {
     // this should have code to do the Gaussian elimination 
 
         int last_row_index = this.get_num_rows() - 1;
+        int rows_subtracted;
 
         double scale_factor;
         int rows_scaled = 0;
@@ -127,6 +131,8 @@ class GaussianElimination extends Equations {
         double numerator, denominator;
 
 
+        //ArrayList<Double> scaled_row = new ArrayList<Double>();
+
     Outer:
         for (int col_num = 0; 
                  col_num < get_num_cols() - 1; ++col_num) {
@@ -136,22 +142,38 @@ class GaussianElimination extends Equations {
             //for (int row_index = last_row_index; 
                      //row_index > 0; --row_index) { 
 
-            denominator = get_element_at(col_num, 0);
 
+            rows_subtracted = 0;
             for (int row_num = 1; row_num < get_num_rows(); ++row_num) {
 
-                numerator = get_element_at(row_num, col_num);
+
+                System.out.println("Col Num: " + col_num);
+                numerator = get_element_at(col_num, col_num);
+                denominator = get_element_at(row_num, col_num);
+
                 System.out.println("num = " + numerator);
                 System.out.println("den = " + denominator);
 
-                scale_factor = numerator / denominator;
-
-                scaleRow(row_num, scale_factor);
-                System.out.println("Scaled by: " + scale_factor);
                 print_matrix();
 
-                subtract_row(row_num, 0); 
+                scale_factor = numerator / denominator;
+                ArrayList<Double> scaled_row = new ArrayList<Double>(get_scaled_copy(row_num, scale_factor));
+
+                //scaleRow(row_num, scale_factor);
+                System.out.println("Scaled by: " + scale_factor);
+                print_matrix();
+                System.out.println("Scaled Row: " + scaled_row);
+
+                subtract_row_by_arraylist(col_num, scaled_row, row_num);
+                //subtract_row(row_num, 0); 
+                rows_subtracted++;
                 System.out.println("Subtracted rows: " + row_num + ", 0");
+
+                System.out.println(rows_subtracted);
+                if (rows_subtracted == get_num_rows() - 1) {
+                    System.out.println("here");
+                    break;
+                }
 
 
 
