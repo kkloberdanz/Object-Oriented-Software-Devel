@@ -14,3 +14,8 @@ Gaussian Elimination:
  9x   +    y  +  63z = -1
  2x   +  18y  -   4z = -2
 12x   +  13y  +  14z = -3
+
+Abstract means that the class cannot make objects.
+It is similar to an interface, but methods may contain code.
+A class may only inherit from one abstruct class, but may inheret
+from multiple interfaces
